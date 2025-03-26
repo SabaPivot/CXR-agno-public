@@ -114,7 +114,7 @@ def simplified_path_finder() -> List[tuple]:
                 # Process all images for the selected patient
                 for img in selected_patient["images"]:
                     # Initialize image_path
-                    image_path = IMAGES_DIR / img['name']
+                    image_path = str(IMAGES_DIR / img['name'])
                     
                     st.session_state.data_paths.append(
                         (
@@ -133,7 +133,7 @@ def simplified_path_finder() -> List[tuple]:
                     idx = int(selection.split("]")[0].replace("[", ""))
                     if 0 <= idx < len(selected_patient["images"]):
                         img = selected_patient["images"][idx]
-                        image_path = IMAGES_DIR / img['name']
+                        image_path = str(IMAGES_DIR / img['name'])
                         
                         st.session_state.data_paths.append(
                             (
@@ -156,7 +156,7 @@ def simplified_path_finder() -> List[tuple]:
             # Add a small preview of loaded images
             for i, path_tuple in enumerate(st.session_state.data_paths):
                 path = path_tuple[0]
-                filename = path.name
+                filename = path.split("/")[-1]
                 st.sidebar.write(f"{i+1}. {filename}")
     
     # Return the paths from session state
